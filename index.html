@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Happy Birthday</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Gochi+Hand&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<script>var PH="data:image/svg+xml;utf8,"+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#cfcfcf"/><circle cx="50" cy="38" r="17" fill="#8d8d8d"/><path d="M12 100 Q50 52 88 100Z" fill="#8d8d8d"/></svg>');</script>
+<style>
+:root{--paper:#dedcd8;--red:#e2232a;--red-d:#c81d22;--ink:#1c1c1c}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--paper);font-family:'Gochi Hand','Gaegu',cursive;color:#fff;overflow-x:hidden}
+.screen{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity .7s ease,visibility .7s}
+.screen.hide{opacity:0;visibility:hidden;pointer-events:none}
+
+/* ---------- 1. envelope ---------- */
+#s1{background:var(--paper);color:var(--ink);gap:clamp(36px,9vh,90px)}
+#s1 h1,#s1 p{font-family:'Nanum Pen Script',cursive;font-weight:400;font-size:clamp(34px,5.2vw,52px);letter-spacing:.03em;opacity:0;animation:fade 1s .2s forwards}
+#s1 p{animation-delay:.9s}
+.env{width:clamp(130px,19vw,190px);cursor:pointer;opacity:0;transform:scale(.6);animation:pop .7s .55s cubic-bezier(.3,1.5,.5,1) forwards,float 3.4s 1.3s ease-in-out infinite;filter:drop-shadow(0 8px 10px rgba(0,0,0,.12))}
+.env:active{transform:scale(.95)}
+.mid{position:relative;display:flex;flex-direction:column;align-items:center;gap:clamp(36px,9vh,90px)}
+
+/* ---------- 2. email card ---------- */
+#s2{background:var(--paper)}
+.card{width:min(92vw,900px);background:linear-gradient(180deg,#e0262c,#e82a2f);border-radius:26px;padding:clamp(22px,4vw,40px) clamp(22px,4vw,44px) clamp(18px,3vw,26px);font-size:clamp(17px,2.6vw,24px);line-height:1.4;box-shadow:0 14px 30px rgba(120,0,0,.22);transform:translateY(24px) scale(.97);opacity:0;transition:.7s .15s cubic-bezier(.2,.9,.3,1)}
+#s2.show .card{transform:none;opacity:1}
+.card .row{display:block}
+.card .msg-l{margin-top:clamp(18px,3vw,30px)}
+.card .msg{margin:12px 0 0 clamp(6px,1.4vw,16px);font-size:clamp(18px,2.8vw,27px);min-height:1.5em}
+.card .msg::after{content:"";display:inline-block;width:2px;height:1em;background:#fff;margin-left:2px;vertical-align:-.12em;animation:blink .8s steps(1) infinite}
+.card.done .msg::after{display:none}
+.att{display:block;width:max-content;margin:clamp(22px,4vw,40px) auto 0;color:#fff;font-size:clamp(14px,1.9vw,17px);text-decoration:underline;text-underline-offset:3px;cursor:pointer;opacity:0;transition:opacity .6s}
+.card.done .att{opacity:1}
+
+/* ---------- 3. birthday page ---------- */
+#s3{background:radial-gradient(120% 90% at 50% 20%,#e6252b 0%,var(--red-d) 100%);justify-content:flex-start;overflow-y:auto;overflow-x:hidden;opacity:0;visibility:hidden;transition:opacity .9s}
+#s3.show{opacity:1;visibility:visible}
+.flags{position:absolute;top:0;left:0;width:100%;height:56px;pointer-events:none;transform:translateY(-70px);transition:transform .9s .7s cubic-bezier(.3,1.3,.5,1)}
+#s3.show .flags{transform:none}
+.wrap{position:relative;width:100%;max-width:760px;margin:0 auto;padding:clamp(70px,13vh,120px) 22px 80px}
+.sticker{position:relative;width:min(300px,64vw);margin:0 auto clamp(26px,5vh,48px);aspect-ratio:1/1.05}
+.sticker>*{position:absolute;opacity:0;transform:scale(.2) rotate(-14deg);transition:.6s cubic-bezier(.3,1.6,.5,1)}
+#s3.show .sticker>*{opacity:1;transform:none}
+#s3.show .cake{transition-delay:.3s}
+#s3.show .photo{transition-delay:1.1s}
+#s3.show .hat{transition-delay:1.5s}
+#s3.show .bolt{transition-delay:1.7s}
+#s3.show .st1{transition-delay:1.8s}#s3.show .st2{transition-delay:1.9s}#s3.show .st3{transition-delay:2s}#s3.show .st4{transition-delay:2.1s}
+.photo{left:24%;top:23%;width:58%;height:68%}
+.photo .cut{position:relative;width:100%;height:100%;clip-path:polygon(18% 2%,72% 0,100% 100%,0 100%,2% 30%);background:#fff}
+.photo .cut img{position:absolute;inset:3px;width:calc(100% - 6px);height:calc(100% - 3px);object-fit:cover;object-position:50% 20%;clip-path:polygon(18% 2%,72% 0,100% 100%,0 100%,2% 30%)}
+.photo{filter:drop-shadow(0 3px 3px rgba(0,0,0,.28))}
+.cake{left:-2%;bottom:-2%;width:40%;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
+.hat{left:28%;top:-8%;width:36%;transform-origin:50% 100%;filter:drop-shadow(0 3px 3px rgba(0,0,0,.25))}
+.bolt{right:0;top:0;width:30%;filter:drop-shadow(0 2px 2px rgba(0,0,0,.25))}
+.st1{left:3%;top:20%;width:15%}.st2{left:14%;top:34%;width:9%}.st3{right:2%;top:36%;width:18%}.st4{right:12%;bottom:12%;width:9%}
+.letter{font-size:clamp(14px,2.1vw,17px);line-height:1.62;letter-spacing:.015em;max-width:560px;margin:0 auto;opacity:0;transform:translateY(20px);transition:1.2s 2.4s}
+#s3.show .letter{opacity:1;transform:none}
+.letter p{margin-bottom:1.55em}
+.sign{text-align:right;margin-top:2.2em;margin-bottom:0}
+#mute{position:fixed;top:12px;right:12px;z-index:9;width:40px;height:40px;border-radius:50%;border:0;background:rgba(255,255,255,.85);font-size:18px;cursor:pointer;display:none;box-shadow:0 2px 8px rgba(0,0,0,.2)}
+.hint{position:fixed;bottom:18px;left:0;right:0;text-align:center;font-family:'Nanum Pen Script';font-size:24px;color:#6b6b6b;opacity:0;animation:fade 1s 2.4s forwards;pointer-events:none}
+#s1.hide~.hint{display:none}
+
+@keyframes fade{to{opacity:1}}
+@keyframes pop{to{opacity:1;transform:scale(1)}}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -7px}}
+@keyframes blink{50%{opacity:0}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+
+<!-- 1 -->
+<section class="screen" id="s1">
+  <h1>hey babe!</h1>
+  <svg class="env" id="env" viewBox="0 0 200 140" role="button" aria-label="open email">
+    <rect x="4" y="12" width="192" height="122" rx="9" fill="#ec6670"/>
+    <path d="M4 21 Q4 12 13 12 H187 Q196 12 196 21 L106 82 Q100 86 94 82 Z" fill="#f08088"/>
+    <path d="M4 134 L84 70 M196 134 L116 70" stroke="#e25761" stroke-width="2" opacity=".55"/>
+    <rect x="4" y="12" width="192" height="122" rx="9" fill="none" stroke="#e05560" stroke-width="1"/>
+    <path d="M100 100 C88 90 78 84 78 72 C78 63 85 58 91 58 C95 58 98 60 100 64 C102 60 105 58 109 58 C115 58 122 63 122 72 C122 84 112 90 100 100Z" fill="#e0242e"/>
+  </svg>
+  <p>you've got new emails</p>
+</section>
+
+<!-- 2 -->
+<section class="screen hide" id="s2">
+  <div class="card" id="card">
+    <span class="row">From: Hossam</span>
+    <span class="row">To: Nona</span>
+    <div class="msg-l">Message:</div>
+    <div class="msg" id="msg"></div>
+    <a class="att" id="att">see attachment</a>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="screen" id="s3">
+  <svg class="flags" viewBox="0 0 1200 56" preserveAspectRatio="none" id="flags"></svg>
+  <div class="wrap">
+    <div class="sticker">
+      <svg class="cake" viewBox="0 0 120 130"><ellipse cx="60" cy="108" rx="56" ry="20" fill="#fff"/><ellipse cx="60" cy="106" rx="44" ry="11" fill="#cfe1ea"/><path d="M26 98 V66 H94 V98 Q60 108 26 98Z" fill="#fff3c2" stroke="#e8a23a" stroke-width="4" stroke-linejoin="round"/><path d="M26 66 Q36 56 46 66 Q56 54 66 66 Q76 56 86 66 L94 66" fill="none" stroke="#ef6a5a" stroke-width="4" stroke-linecap="round"/><path d="M34 88 L46 78 L56 90 L68 76 L84 88" fill="none" stroke="#ef6a5a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><rect x="57" y="40" width="6" height="22" rx="2" fill="#4a7fc9"/><path d="M60 14 Q70 28 60 36 Q50 28 60 14Z" fill="#f5b72f"/></svg>
+      <div class="photo"><div class="cut"><img id="photo" src="photo.jpg" alt="" onerror="this.onerror=null;this.src=PH"></div></div>
+      <svg class="hat" viewBox="0 0 100 130"><path d="M48 4 L92 112 Q50 126 8 112Z" fill="#f4d45a" stroke="#fff" stroke-width="5" stroke-linejoin="round"/><path d="M48 4 L92 112 Q50 126 8 112Z" fill="#f4d45a"/><path d="M30 70 L66 56" stroke="#e8b83a" stroke-width="2" opacity=".6"/><g transform="rotate(-9 50 78)" font-family="Arial Black,Arial" font-weight="900" fill="#c2332b" text-anchor="middle"><text x="50" y="76" font-size="11">HAPPY</text><text x="50" y="90" font-size="11">BIRTHDAY</text></g></svg>
+      <svg class="bolt" viewBox="0 0 100 100"><g stroke="#fff" stroke-width="8" stroke-linejoin="round" fill="#d9363a"><path d="M30 4 L10 50 H30 L18 92 L52 38 H32 L48 4Z"/><path d="M68 18 L56 50 H70 L62 80 L90 40 H74 L84 18Z" transform="translate(0 6)"/></g><g fill="#d9363a"><path d="M30 4 L10 50 H30 L18 92 L52 38 H32 L48 4Z"/><path d="M68 18 L56 50 H70 L62 80 L90 40 H74 L84 18Z" transform="translate(0 6)"/></g></svg>
+      <svg class="st1" viewBox="0 0 40 40"><path d="M20 3 L25 15 L38 15 L28 23 L32 36 L20 28 L8 36 L12 23 L2 15 L15 15Z" fill="#2c3f94" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/></svg>
+      <svg class="st2" viewBox="0 0 40 40"><path d="M20 3 L25 15 L38 15 L28 23 L32 36 L20 28 L8 36 L12 23 L2 15 L15 15Z" fill="#2c3f94" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/></svg>
+      <svg class="st3" viewBox="0 0 40 40"><path d="M20 3 L25 15 L38 15 L28 23 L32 36 L20 28 L8 36 L12 23 L2 15 L15 15Z" fill="#d84a5a" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/><path d="M20 12 L22 18 L28 18 L23 22 L25 28 L20 24 L15 28 L17 22 L12 18 L18 18Z" fill="#2c7f5a"/></svg>
+      <svg class="st4" viewBox="0 0 40 40"><path d="M20 3 L25 15 L38 15 L28 23 L32 36 L20 28 L8 36 L12 23 L2 15 L15 15Z" fill="#2c3f94" stroke="#fff" stroke-width="3.5" stroke-linejoin="round"/></svg>
+    </div>
+
+    <article class="letter">
+      <p>Dear: Nona</p>
+      <p>Happy Birthday, my love.</p>
+      <p>Being with you is truly one of the best things that has ever happened to me. From the moment you came into my life, everything started to feel brighter and more meaningful. Thank you for loving me the way you do, for supporting me even when things are difficult, and for always reminding me that I'm not alone. You make ordinary days feel special just by being there.</p>
+      <p>I'm so grateful for every laugh we share, every memory we create, and every moment we spend together. You have a way of making my heart feel safe and happy at the same time. Your kindness, your strength, and the way you care for the people around you are just some of the many reasons why I admire you so much.</p>
+      <p>Thank you for being my partner, my best friend, and my greatest blessing. I'm so lucky to call you mine, today and always.</p>
+      <p>Happy Birthday again, my love. I love you more than words can ever explain.</p>
+      <p class="sign">Your Lover:<br>Hossam</p>
+    </article>
+  </div>
+</section>
+
+<audio id="song" src="mix.mp3" preload="auto"></audio>
+<button id="mute" aria-label="sound" title="sound">🔊</button>
+
+<script>
+// bunting
+(function(){
+  var cols=['#f1c9c9','#5fb7b2'],n=26,w=1200/n,s='<path d="M0 6 Q600 18 1200 6" stroke="#f3b9b9" stroke-width="0" fill="none"/>';
+  for(var i=0;i<n;i++){
+    var x=i*w, y=6+Math.sin(i*.5)*3, c=cols[i%2];
+    s+='<path d="M'+x+' '+y+' L'+(x+w)+' '+(y+2)+' L'+(x+w/2)+' '+(y+34)+'Z" fill="'+c+'" opacity="'+(i%2?1:.85)+'" transform="rotate('+((i%3-1)*5)+' '+(x+w/2)+' '+y+')"/>';
+  }
+  document.getElementById('flags').innerHTML=s;
+})();
+
+document.getElementById('mute').addEventListener('click',function(){var a=document.getElementById('song');a.muted=!a.muted;this.textContent=a.muted?'🔇':'🔊'});
+var PLAYLIST=['mix.mp3'],track=0;
+function startMusic(){
+  var a=document.getElementById('song'),m=document.getElementById('mute');
+  try{
+    a.volume=.9;m.style.display='block';
+    a.addEventListener('ended',function(){track=(track+1)%PLAYLIST.length;a.src=PLAYLIST[track];a.play().catch(function(){})});
+    var pr=a.play();if(pr&&pr.catch)pr.catch(function(){});
+  }catch(e){}
+}
+var s1=document.getElementById('s1'),s2=document.getElementById('s2'),s3=document.getElementById('s3');
+var card=document.getElementById('card'),msg=document.getElementById('msg');
+var TEXT=Array.from("A Special Massage To My Special partner..❤️"),busy=false;
+
+document.getElementById('env').addEventListener('click',function(){
+  if(busy)return;busy=true;
+  s1.classList.add('hide');
+  s2.classList.remove('hide');
+  setTimeout(function(){s2.classList.add('show')},60);
+  var i=0;setTimeout(function t(){
+    msg.textContent=TEXT.slice(0,++i).join('');
+    if(i<TEXT.length)setTimeout(t,45);else card.classList.add('done');
+  },900);
+});
+document.getElementById('att').addEventListener('click',function(){
+  startMusic();
+  s2.classList.add('hide');
+  s3.style.opacity='';
+  requestAnimationFrame(function(){s3.classList.add('show')});
+  s3.scrollTop=0;
+});
+</script>
+</body>
+</html>
